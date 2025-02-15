@@ -1,0 +1,28 @@
+*************************************************************************
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+Steps:
+
+1. First, copy all non-zero elements from arr[] to the temporary array. 
+2. Then, fill all the remaining positions in temporary array with 0.
+3. Finally, copy all the elements from temporary array to arr[].
+*************************************************************************
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int n = nums.length;
+        int i = 0;
+        int index = 0;
+        while (i < n) {
+            if (nums[i] != 0) {
+                nums[index] = nums[i];
+                index++;
+            }
+            i++;
+        }
+        while (index < n) {
+            nums[index++] = 0;
+        }
+    }
+}
