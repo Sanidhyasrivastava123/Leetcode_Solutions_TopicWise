@@ -1,0 +1,48 @@
+*************************************************************************
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Using Moore's Voting Algorithm:
+1. Create variables to track counts and candidates for potential 
+    majority elements.
+2. First Pass - Find Potential Majority Elements:
+3. Iterate through the input array and identify potential majority element 
+   candidates.
+4. Update the candidates based on specific conditions.
+5. Maintain counts for each candidate.
+6. Second Pass - Count Occurrences:
+7. Iterate through the input array again to count the occurrences of the 
+   potential majority elements.
+8. Compare the counts with a threshold to determine the majority elements.
+9. Return Majority Elements.
+**************************************************************************
+
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int count1 = 0, count2 = 0; // Counters for the potential majority elements
+        int candidate1 = 0, candidate2 = 0; // Potential majority element candidates
+
+        // First pass to find potential majority elements.
+        for (int i = 0; i < nums.length; i++) {
+            // If count1 is 0 and the current number is not equal to candidate2, update candidate1.
+            if (count1 == 0 && nums[i] != candidate2) {
+                count1 = 1;
+                candidate1 = nums[i];
+            } 
+            // If count2 is 0 and the current number is not equal to candidate1, update candidate2.
+            else if (count2 == 0 && nums[i] != candidate1) {
+                count2 = 1;
+                candidate2 = nums[i];
+            } 
+            // Update counts for candidate1 and candidate2.
+            else if (candidate1 == nums[i]) {
+                count1++;
+            } else if (candidate2 == nums[i]) {
+                count2++;
+            } 
+            // If the current number is different from both candidates, decrement their counts.
+            else {
+                count1--;
+                count2--;
+            }
+        }
